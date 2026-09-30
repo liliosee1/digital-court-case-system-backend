@@ -17,9 +17,29 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class CaseSerializer(serializers.ModelSerializer):
+    assigned_judge = serializers.PrimaryKeyRelatedField(
+        queryset=User.objects.all(),
+        allow_null=True,
+        required=False,
+    )
+    created_by = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
+
     class Meta:
         model = Case
-        fields = "__all__"
+        fields = (
+            "id",
+            "case_number",
+            "case_type",
+            "title",
+            "description",
+            "filing_date",
+            "status",
+            "assigned_judge",
+            "created_by",
+            "created_at",
+            "updated_at",
+        )
+        read_only_fields = ("id", "created_at", "updated_at")
 
 
 class PartySerializer(serializers.ModelSerializer):
