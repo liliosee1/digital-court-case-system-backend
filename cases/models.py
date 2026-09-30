@@ -130,6 +130,7 @@ class Hearing(models.Model):
     created_by = models.ForeignKey(
         User,
         on_delete=models.DO_NOTHING,
+        db_column='created_by',
         related_name='created_hearings'
     )
     created_at = models.DateTimeField(blank=True, null=True)
