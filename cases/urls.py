@@ -1,4 +1,5 @@
 from django.urls import path
+from django.views.generic import TemplateView
 
 from rest_framework.renderers import JSONOpenAPIRenderer
 from rest_framework.schemas import get_schema_view
@@ -56,5 +57,9 @@ urlpatterns = [
     path("users/<int:pk>/", UserDetailAPIView.as_view(), name="user-detail"),
     path("dashboard/summary/", DashboardSummaryAPIView.as_view(), name="dashboard-summary"),
     path("schema/", schema_view, name="openapi-schema"),
-    path("docs/", schema_view, name="api-docs"),
+    path(
+        "docs/",
+        TemplateView.as_view(template_name="cases/api_docs.html"),
+        name="api-docs",
+    ),
 ]
